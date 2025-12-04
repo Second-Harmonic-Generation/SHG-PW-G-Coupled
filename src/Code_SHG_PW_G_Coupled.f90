@@ -9,11 +9,11 @@
 !            * File name:                                                                     *
 !            *     Code_SHG_PW_G_Coupled.F90                                                  *
 !            *                                                                                *
-!            * This Fortran code is developed specifically for solving five coupled equations *
-!            *     using Finite Difference Method (FDM):                                      *
-!            *     - Heat-equation                                                            *
-!            *     - Phase-equation                                                           *
-!            *     - Fields-equations                                                         *
+!            * This Fortran code solves five coupled differential equations for heat-coupled  *
+!            *     Type II pulsed second harmonic generation (SHG) in KTP crystal using FDM:  *
+!            *     three field equations (fundamental ordinary, extraordinary, and SH), one   *
+!            *     heat equation with temperature-dependent thermal conductivity, and one     *
+!            *     phase equation for thermal phase mismatching.                              *
 !            *                                                                                *
 !            **********************************************************************************
 
