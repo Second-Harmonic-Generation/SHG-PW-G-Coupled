@@ -60,9 +60,9 @@ Article title:
 
 ## 1. About this repository
 
+Computational model of heat-coupled depleted pulsed Gaussian Second Harmonic Generation (SHG) in Type II configuration, where the interaction occurs between fundamental beams with orthogonal polarizations (ordinary and extraordinary) in potassium titanyl phosphate (KTP) crystal. The model includes thermal phase mismatching, thermal lensing, optical absorption, and thermal cooling mechanisms, solving five coupled differential equations (three field equations, one heat equation with temperature-dependent thermal conductivity, and one phase equation) simultaneously using the Finite Difference Method (FDM) until steady-state thermal conditions are achieved.
 
 This repository contains the **toolkit and computational tools** used in the research article **"Heat coupled type II long-pulse second harmonic generation: a model for inclusion of thermal phase mismatching and thermal lensing"**, including source code, numerical solvers, and reproducibility assets.  
-
 
 This toolkit provides a comprehensive time-dependent three-dimensional spatial model for the mutual interaction of type II pulsed second harmonic generation and thermal effects in potassium titanyl phosphate (KTP) crystals. The toolkit implements a complete solution for five coupled differential equations solved simultaneously using the Finite Difference Method (FDM). The coupled equations include three field equations for fundamental ordinary wave, fundamental extraordinary wave, and second harmonic wave, one heat equation with temperature-dependent thermal conductivity, and one phase equation for thermal phase mismatching.
 
@@ -87,23 +87,32 @@ Folder PATH listing
 │       SHG-banner.png            <-- SHG project banner
 │
 +---results                       <-- Numerical simulation results
-│       E_045_f_4000_Np_1_tp_50…  <-- Temperature time series data
-│       E_045_f_4000_Np_1_tp_50…  <-- Temperature radial distribution data
-│       E_045_f_4000_Np_1_tp_50…  <-- Temperature axial distribution data
-│       E_045_f_4000_Np_1_tp_50…  <-- Phase time series data
+│       E_045_f_4000_Np_1_tp_50…  <-- Elec12 radial distribution data
+│       E_045_f_4000_Np_1_tp_50…  <-- Elec12 time series data
+│       E_045_f_4000_Np_1_tp_50…  <-- Elec12 axial distribution data
+│       E_045_f_4000_Np_1_tp_50…  <-- Elec22 radial distribution data
+│       E_045_f_4000_Np_1_tp_50…  <-- Elec22 time series data
+│       E_045_f_4000_Np_1_tp_50…  <-- Elec22 axial distribution data
+│       E_045_f_4000_Np_1_tp_50…  <-- Elec32 radial distribution data
+│       E_045_f_4000_Np_1_tp_50…  <-- Elec32 time series data
+│       E_045_f_4000_Np_1_tp_50…  <-- Elec32 axial distribution data
+│       E_045_f_4000_Np_1_tp_50…  <-- Optimization index data
 │       E_045_f_4000_Np_1_tp_50…  <-- Phase radial distribution data
+│       E_045_f_4000_Np_1_tp_50…  <-- Phase time series data
 │       E_045_f_4000_Np_1_tp_50…  <-- Phase axial distribution data
-│       E_045_f_4000_Np_1_tp_50…  <-- Electric field squared data for all waves
-│       E_045_f_4000_Np_1_tp_50…  <-- Maximum temperature and phase data
-│       E_045_f_4000_Np_1_tp_50…  <-- Psi picks and optimization data
+│       E_045_f_4000_Np_1_tp_50…  <-- Minimum phase data
+│       E_045_f_4000_Np_1_tp_50…  <-- Psi2 picks data
+│       E_045_f_4000_Np_1_tp_50…  <-- Psi3 picks data
+│       E_045_f_4000_Np_1_tp_50…  <-- Temperature radial data
+│       E_045_f_4000_Np_1_tp_50…  <-- Temperature time series data
+│       E_045_f_4000_Np_1_tp_50…  <-- Temperature axial data
+│       E_045_f_4000_Np_1_tp_50…  <-- Maximum temperature data
 │
 +---src                           <-- Contains source code
-│       Code_SHG_PW_G_Coupled.f90 <-- Fortran solver for coupled equations
+│       Code_SHG_PW_G_Coupled…    <-- Fortran solver for coupled equations
 │
-│       main.tex                  <-- LaTeX source for research paper
-│       LICENSE                   <-- Project license information
-│       README.md                 <-- Project overview and documentation
-│
+│        LICENSE                   <-- Project license information
+│        README.md                 <-- Project overview and documentation
 
 ```
 
