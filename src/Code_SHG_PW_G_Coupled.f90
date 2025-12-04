@@ -11,39 +11,10 @@
 !            *                                                                                *
 !            * This Fortran code is developed specifically for solving five coupled equations *
 !            *     using Finite Difference Method (FDM):                                      *
-!            *     - Heat-equation                                                             *
-!            *     - Phase-equation                                                            *
-!            *     - Fields-equations                                                          *
+!            *     - Heat-equation                                                            *
+!            *     - Phase-equation                                                           *
+!            *     - Fields-equations                                                         *
 !            *                                                                                *
-!            * Authors:                                                                       *
-!            *     Dr. Mohammad Sabaeian    , Department of Physics, Shahid Chamran University*
-
-!            *     Mostafa Mohammad-Rezaee , Department of Physics, Shahid Chamran University*
-
-!            *     Alireza Motazedian      , Department of Physics, Shahid Chamran University *
-
-!            *     Fatemeh Sedaghat        , Department of Physics, Shahid Chamran University *
-
-!            *                                                                                *
-
-!            * Contact:                                                                       *
-
-!            *     m_sabaeian@yahoo.com                                                       *
-
-!            *     mostafa_mohammadrezaee@yahoo.com                                           *
-
-!            *     alireza.motazedian@yahoo.com                                                *
-
-!            *     f.sedaghat2010@yahoo.com                                                    *
-
-!            *                                                                                *
-
-!            * originally Written : 17-Apr-2013   by  MS  &  MM  &  AM  &  FS                *
-
-!            *       last revised : 25-Aug-2013   by  MS  &  MM  &  AM  &  FS                *
-
-!            *                                                                                *
-
 !            **********************************************************************************
 
 program Coupled_G_PW
@@ -54,89 +25,89 @@ implicit none
 !                                       Variables Definition
 !**********************************************************************************************************************
 !-------------------------------------- Common Variables
-integer       i            ,j          ,k          ,l                                                                &
-             ,nt           ,nr         ,nz         ,Np         ,inn        ,kn                                       &
-	     ,nt1          ,run                                                                                      &
-	     ,nomegaf                                                          
+integer      i            ,j          ,k          ,l                                                                &
+            ,nt           ,nr         ,nz         ,Np         ,inn        ,kn                                       &
+	         ,nt1          ,run                                                                                      &
+	         ,nomegaf                                                          
 
-real*8        E            ,t          ,z          ,r          ,x          ,y                                        &                                 
-             ,pi           ,tp         ,y1         ,y2                                                               &
-             ,freq                                                                                                   &
-	     ,timet        ,alpha      ,gama1      ,gama2      ,gama3      ,power      ,nnrom                        &   
-	     ,no1T0        ,ne1T0      ,ne2T0      ,no1rT      ,ne2rT      ,ne1rT                                    &
-	     ,omegaf       ,length     ,deltar     ,deltaz     ,deltat     ,radius                                   &  
-	     ,lambda1      ,lambda2    ,deltar1    ,deltar2                                                          & 
-             ,tbetween                                                             
+real*8       E            ,t          ,z          ,r          ,x          ,y                                        &                                 
+            ,pi           ,tp         ,y1         ,y2                                                               &
+            ,freq                                                                                                   &
+	         ,timet        ,alpha      ,gama1      ,gama2      ,gama3      ,power      ,nnrom                        &   
+	         ,no1T0        ,ne1T0      ,ne2T0      ,no1rT      ,ne2rT      ,ne1rT                                    &
+	         ,omegaf       ,length     ,deltar     ,deltaz     ,deltat     ,radius                                   &  
+	         ,lambda1      ,lambda2    ,deltar1    ,deltar2                                                          & 
+            ,tbetween                                                             
 
 complex*16    Ii                                                                                                       
 
 character*35  freqf      ,Npf        ,tpf        ,EE
 
 !-------------------------------------- Thermal Variables
-real*8        h                                                                                                      &  
-             ,T0         ,Cp                                                                                         &
-	     ,roh        ,aa1        ,aa2        ,aa3        ,aa4        ,aa5        ,KT0                            &
-             ,Tinf       ,Tamb       ,Temp                                                                           & 
-	     ,sigma                                                                                                  &
-	     ,Tempmax                                                                                                &
-             ,epsilong                                                                                               &
-	     ,stability                                                                                              &
+real*8       h                                                                                                      &  
+            ,T0         ,Cp                                                                                         &
+	         ,roh        ,aa1        ,aa2        ,aa3        ,aa4        ,aa5        ,KT0                            &
+            ,Tinf       ,Tamb       ,Temp                                                                           & 
+	         ,sigma                                                                                                  &
+	         ,Tempmax                                                                                                &
+            ,epsilong                                                                                               &
+	         ,stability                                                                                              &
 		 	  
-	     ,temperature[allocatable](:,:,:)    ,KT[allocatable](:,:)                                              
+	         ,temperature[allocatable](:,:,:)      ,KT[allocatable](:,:)                                              
 
-character*35  filenameTt   ,filenameTr   ,filenameTz                                                                 &
+character*35  filenameTt          ,filenameTr     ,filenameTz                                                       &
              ,filenameTempmaxl
 !-------------------------------------- Phase Variables
-real*8        phi                                                                                                    &
-             ,B1T0         ,B2T0         ,C1T0          ,C2T0         ,B1rT         ,B2rT         ,C1rT              &
-	     ,C2rT                                                                                                   &		 
-             ,Phase                                                                                                  &
-	     ,aa1T0        ,bb1T0        ,cc1T0         ,nx1T0        ,ny1T0        ,nz1T0        ,Term1             &
-	     ,aa2T0        ,bb2T0        ,cc2T0         ,nx2T0        ,ny2T0        ,nz2T0        ,Term2             &
-	     ,aa1rT        ,bb1rT        ,cc1rT         ,nx1rT        ,ny1rT        ,nz1rT        ,Term3             &
-	     ,aa2rT        ,bb2rT        ,cc2rT         ,nx2rT        ,ny2rT        ,nz2rT        ,theta             &
-	     ,B1r0T        ,B2r0T        ,C1r0T         ,C2r0T                                                       &                                
+real*8   phi                                                                                                        &
+        ,B1T0         ,B2T0         ,C1T0          ,C2T0         ,B1rT         ,B2rT         ,C1rT                  &
+	     ,C2rT                                                                                                       &		 
+        ,Phase                                                                                                      &
+	     ,aa1T0        ,bb1T0        ,cc1T0         ,nx1T0        ,ny1T0        ,nz1T0        ,Term1                 &
+	     ,aa2T0        ,bb2T0        ,cc2T0         ,nx2T0        ,ny2T0        ,nz2T0        ,Term2                 &
+	     ,aa1rT        ,bb1rT        ,cc1rT         ,nx1rT        ,ny1rT        ,nz1rT        ,Term3                 &
+	     ,aa2rT        ,bb2rT        ,cc2rT         ,nx2rT        ,ny2rT        ,nz2rT        ,theta                 &
+	     ,B1r0T        ,B2r0T        ,C1r0T         ,C2r0T                                                           &                                
 
-	     ,aa1r0T       ,bb1r0T       ,cc1r0T        ,nx1r0T       ,ny1r0T       ,nz1r0T       ,dnx1dT            &
-	     ,aa2r0T       ,bb2r0T       ,cc2r0T        ,nx2r0T       ,ny2r0T       ,nz2r0T       ,dnx2dT            &
-             ,dny1dT       ,dny2dT       ,dnz1dT        ,dnz2dT       ,no1r0T       ,ne1r0T       ,ne2r0T            &   
+	     ,aa1r0T       ,bb1r0T       ,cc1r0T        ,nx1r0T       ,ny1r0T       ,nz1r0T       ,dnx1dT                &
+	     ,aa2r0T       ,bb2r0T       ,cc2r0T        ,nx2r0T       ,ny2r0T       ,nz2r0T       ,dnx2dT                &
+        ,dny1dT       ,dny2dT       ,dnz1dT        ,dnz2dT       ,no1r0T       ,ne1r0T       ,ne2r0T                &   
              
-             ,Phasemin                                                                                               &
+        ,Phasemin                                                                                                   &
 
-	     ,deltano1rT   ,deltane1rT   ,deltane2rT                                                                 &   
+	     ,deltano1rT   ,deltane1rT   ,deltane2rT                                                                     &   
 	     ,deltano1r0T  ,deltane1r0T  ,deltane2r0T                                                     
 
-complex*8     deltaphase[allocatable](:,:)                                                                           &
+complex*8     deltaphase[allocatable](:,:)                                                                          &
              ,phasechange[allocatable](:,:,:)
 
-character*35  filenamePt   ,filenamePr   ,filenamePz                                                                 &
+character*35  filenamePt   ,filenamePr   ,filenamePz                                                                &
              ,filenamePhaseminl
 
 !-------------------------------------- Fields Variables
-integer       f            ,ibest
+integer     f            ,ibest
 
-real*8        c                                                                                                      &
-             ,fi                                                                                                     &
-	     ,deff                                                                                                   &
-             ,omega        ,Psi22         ,Psi32                                                                     &
-             ,Lscale       ,Elec12        ,Elec22         ,Elec32                                                    &
-	     ,epsilon0     ,Psi2max       ,Psi3max                                                                                          
+real*8      c                                                                                                      &
+           ,fi                                                                                                     &
+	        ,deff                                                                                                   &
+           ,omega        ,Psi22         ,Psi32                                                                     &
+           ,Lscale       ,Elec12        ,Elec22         ,Elec32                                                    &
+	        ,epsilon0     ,Psi2max       ,Psi3max                                                                                          
 
-complex*16    cc1          ,cc2          ,cc3           ,cc4          ,cc5                                           &
-             ,dd1          ,dd2          ,dd3           ,dd4          ,dd5                                           &
-             ,ee1          ,ee2          ,ee3           ,ee4          ,ee5                                           &
+complex*16    cc1          ,cc2          ,cc3           ,cc4          ,cc5                                         &
+             ,dd1          ,dd2          ,dd3           ,dd4          ,dd5                                         &
+             ,ee1          ,ee2          ,ee3           ,ee4          ,ee5                                         &
 
-             ,Psi1[allocatable](:,:,:)   ,Elec1[allocatable](:,:,:)                                                  &
-	     ,Psi2[allocatable](:,:,:)   ,Elec2[allocatable](:,:,:)                                                  &  
-	     ,Psi3[allocatable](:,:,:)   ,Elec3[allocatable](:,:,:) 
+             ,Psi1[allocatable](:,:,:)   ,Elec1[allocatable](:,:,:)                                                &
+	          ,Psi2[allocatable](:,:,:)   ,Elec2[allocatable](:,:,:)                                                &  
+	          ,Psi3[allocatable](:,:,:)   ,Elec3[allocatable](:,:,:) 
                      
 
-character*35  filenameibestl                                                                                         &
-             ,filenameElec12t      ,filenameElec12r       ,filenameElec12z                                           &
-             ,filenameElec22t      ,filenameElec22r       ,filenameElec22z                                           &         
-	     ,filenameElec32t      ,filenameElec32r       ,filenameElec32z                                           &
+character*35  filenameibestl                                                                                       &
+             ,filenameElec12t      ,filenameElec12r       ,filenameElec12z                                         &
+             ,filenameElec22t      ,filenameElec22r       ,filenameElec22z                                         &         
+	          ,filenameElec32t      ,filenameElec32r       ,filenameElec32z                                         &
              
-	     ,filenamePsi3picksl                                                                                     & 
+	          ,filenamePsi3picksl                                                                                   & 
              ,filenamePsi2picksl 
 
 !**********************************************************************************************************************
@@ -145,16 +116,16 @@ character*35  filenameibestl                                                    
 !-------------------------------------- Giving Zero to Common Variables
               i = 0            ;j = 0            ;k = 0        ;l = 0               
              nt = 0           ;nr = 0           ;nz = 0       ;Np = 0       ;inn= 0        ;kn = 0                                                  
-	    nt1 = 0           ;run = 0                                                 
+	         nt1 = 0           ;run = 0                                                 
         nomegaf = 0
 
               E = 0.            ;t = 0.            ;z = 0.        ;r = 0.        ;x = 0.         ;y = 0.         
              pi = 0.           ;tp = 0.           ;y1 = 0.       ;y2 = 0.           
            freq = 0.                                                                                                
-	  timet = 0.        ;alpha = 0.        ;gama1 = 0.    ;gama2 = 0.    ;gama3 = 0.     ;power = 0.    ;nnrom = 0.
+	       timet = 0.        ;alpha = 0.        ;gama1 = 0.    ;gama2 = 0.    ;gama3 = 0.     ;power = 0.    ;nnrom = 0.
           no1T0 = 0.        ;ne2T0 = 0.        ;ne1T0 = 0.    ;no1rT = 0.    ;ne2rT = 0.     ;ne1rT = 0.      
-	 omegaf = 0.       ;length = 0.       ;deltar = 0.   ;deltaz = 0.   ;deltat = 0.    ;radius = 0.                                               
-	lambda1 = 0.      ;lambda2 = 0.      ;deltar1 = 0.  ;deltar2 = 0.
+	      omegaf = 0.       ;length = 0.       ;deltar = 0.   ;deltaz = 0.   ;deltat = 0.    ;radius = 0.                                               
+	     lambda1 = 0.      ;lambda2 = 0.      ;deltar1 = 0.  ;deltar2 = 0.
        tbetween = 0.                                              
 
              Ii = (0.,0.)  
@@ -162,9 +133,9 @@ character*35  filenameibestl                                                    
 !-------------------------------------- Giving Zero to Thermal Variables
               h = 0.                                                                                                                       
              T0 = 0.           ;Cp = 0.                                                    
-	    roh = 0.          ;aa1 = 0.          ;aa2 = 0.      ;aa3 = 0.      ;aa4 = 0.      ;aa5 = 0.      ;KT0 = 0.      
+	         roh = 0.          ;aa1 = 0.          ;aa2 = 0.      ;aa3 = 0.      ;aa4 = 0.      ;aa5 = 0.      ;KT0 = 0.      
            Tinf = 0.         ;Tamb = 0.         ;Temp = 0.
-	  sigma = 0.                                                                       
+	       sigma = 0.                                                                       
         Tempmax = 0. 
        epsilong = 0.                                      
       stability = 0.   
@@ -175,14 +146,14 @@ character*35  filenameibestl                                                    
            C2rT = 0.    
           Phase = 0.			 
           aa1T0 = 0.        ;bb1T0 = 0.        ;cc1T0 = 0.    ;nx1T0 = 0.    ;ny1T0 = 0.    ;nz1T0 = 0.    ;Term1 = 0.         
-	  aa2T0 = 0.        ;bb2T0 = 0.        ;cc2T0 = 0.    ;nx2T0 = 0.    ;ny2T0 = 0.    ;nz2T0 = 0.    ;Term2 = 0.        
-	  aa1rT = 0.        ;bb1rT = 0.        ;cc1rT = 0.    ;nx1rT = 0.    ;ny1rT = 0.    ;nz1rT = 0.    ;Term3 = 0.              
+	       aa2T0 = 0.        ;bb2T0 = 0.        ;cc2T0 = 0.    ;nx2T0 = 0.    ;ny2T0 = 0.    ;nz2T0 = 0.    ;Term2 = 0.        
+	       aa1rT = 0.        ;bb1rT = 0.        ;cc1rT = 0.    ;nx1rT = 0.    ;ny1rT = 0.    ;nz1rT = 0.    ;Term3 = 0.              
           aa2rT = 0.        ;bb2rT = 0.        ;cc2rT = 0.    ;nx2rT = 0.    ;ny2rT = 0.    ;nz2rT = 0.    ;theta = 0.       
-	  B1r0T = 0.        ;B2r0T = 0.        ;C1r0T = 0.    ;C2r0T = 0.                                                                     
+	       B1r0T = 0.        ;B2r0T = 0.        ;C1r0T = 0.    ;C2r0T = 0.                                                                     
                           
             
-	 aa1r0T = 0.       ;bb1r0T = 0.       ;cc1r0T = 0.   ;nx1r0T = 0.   ;ny1r0T = 0.   ;nz1r0T = 0.   ;dnx1dT = 0.       
-	 aa2r0T = 0.       ;bb2r0T = 0.       ;cc2r0T = 0.   ;nx2r0T = 0.   ;ny2r0T = 0.   ;nz2r0T = 0.   ;dnx2dT = 0.     
+	      aa1r0T = 0.       ;bb1r0T = 0.       ;cc1r0T = 0.   ;nx1r0T = 0.   ;ny1r0T = 0.   ;nz1r0T = 0.   ;dnx1dT = 0.       
+	      aa2r0T = 0.       ;bb2r0T = 0.       ;cc2r0T = 0.   ;nx2r0T = 0.   ;ny2r0T = 0.   ;nz2r0T = 0.   ;dnx2dT = 0.     
          dny1dT = 0.       ;dny2dT = 0.       ;dnz1dT = 0.   ;dnz2dT = 0.   ;no1r0T = 0.   ;ne1r0T = 0.   ;ne2r0T = 0.    
      deltano1rT = 0.   ;deltane1rT = 0.   ;deltane2rT = 0.                                                                   
     deltano1r0T = 0.  ;deltane1r0T = 0.  ;deltane2r0T = 0.                                                    
@@ -197,8 +168,8 @@ character*35  filenameibestl                                                    
             ee1 = 0.          ;ee2 = 0.          ;ee3 = 0.      ;ee4 = 0.      ;ee5 = 0.                                          
  
            deff = 0.                                        
-	  omega = 0.        ;Psi22 = 0.        ;Psi32 = 0.
-	 Lscale = 0.       ;Elec12 = 0.       ;Elec22 = 0.   ;Elec32 = 0.  
+	       omega = 0.        ;Psi22 = 0.        ;Psi32 = 0.
+	      Lscale = 0.       ;Elec12 = 0.       ;Elec22 = 0.   ;Elec32 = 0.  
        epsilon0 = 0.      ;Psi2max = 0.      ;Psi3max = 0.
 
 !**********************************************************************************************************************
@@ -208,7 +179,7 @@ character*35  filenameibestl                                                    
 ! Note: 
 !     This code lets the user enter values twice: once numerically (for calculations) 
 !     and once as a string (for filenames or labels).  
-!     For example, `E` is number, while `EE` stores the same value as a string.  
+!     For example, `E` is number,while `EE` store the same values as strings.  
 !     This dual input ensures accurate calculations and meaningful file naming.
 
 write(*,'(/,2x,a,\)') '            Enter the Energy value  : '
@@ -244,8 +215,8 @@ tpf = '50'
 !**********************************************************************************************************************
 
 ! Note:
-!     To achieve both efficiency and clarity in managing output data,
-!     below, we generate filenames based on input information.
+!      To achieve both efficiency and clarity in managing output data,
+!      below, we generate filenames based on input information.
 
 !------------------------------------------------ Heat Equation Files
 filenameTt = 'E'//trim(EE)//' f'//trim(freqf)//' Np'//trim(Npf)//' tp'//trim(tpf)//' Tt.plt'
@@ -262,7 +233,7 @@ open(3,file=filenameTz)
 
 write(*,'(2/,a,/,40x,a,/,40x,a,/,40x,a,/)')' Results will be saved in these files :',filenameTt  &
                                                                                     ,filenameTr  &
-																					,filenameTz
+																				                     	,filenameTz
  read(*,*)
 
 !------------------------------------------------ Phase Equation Files
@@ -280,7 +251,7 @@ open(6,file=filenamePz)
 
 write(*,'(2/,a,/,40x,a,/,40x,a,/,40x,a,/)')' Results will be saved in these files :',filenamePt  &
                                                                                     ,filenamePr  &
-	             								    ,filenamePz
+	             								                                             ,filenamePz
  read(*,*)
 
 !------------------------------------------------ Field Equations Files
@@ -317,7 +288,7 @@ open(12,file=filenameElec22z)
 
 write(*,'(2/,a,/,40x,a,/,40x,a,/,40x,a,/)')' Results will be saved in these files :',filenameElec22t  &
                                                                                     ,filenameElec22r  &
-										    ,filenameElec22z
+										                                                      ,filenameElec22z
  read(*,*)
 
 !------------------
@@ -335,7 +306,7 @@ open(15,file=filenameElec32z)
 
 write(*,'(2/,a,/,40x,a,/,40x,a,/,40x,a,/)')' Results will be saved in these files :',filenameElec32t  &
                                                                                     ,filenameElec32r  &
-										    ,filenameElec32z
+										                                                      ,filenameElec32z
  read(*,*)
 
 !------------------
