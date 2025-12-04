@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Rezaee"
+  given-names: "Mostafa Mohammad"
+- family-names: "Sabaeian"
+  given-names: "Mohammad"
+- family-names: "Motazedian"
+  given-names: "Alireza"
+- family-names: "Jalil-Abadi"
+  given-names: "Fatemeh Sedaghat"
+- family-names: "Khaldi-Nasab"
+  given-names: "Ali"
+title: "Complete Anisotropic Time-Dependent Heat Equation in KTP Crystal under Repetitively Pulsed Gaussian Beams: A Numerical Approach"
+version: 1.0.0
+doi: 10.1364/AO.54.001241
+date-released: 2015-02-20
+url: "https://doi.org/10.1364/AO.54.001241"
+repository-code: "https://github.com/Second-Harmonic-Generation/SHG-PW-G-Heat-Equation"
+abstract: "In this work, a thorough and detailed solution for the time-dependent heat equation for a cylindrical nonlinear potassium titanyl phosphate (KTP) crystal under a repetitively pulsed pumping source is developed. The convection and radiation boundary conditions, which are usually ignored in the literature, have been taken into account, and their importance on the temperature distribution has been discussed in detail. Moreover, the temperature dependence of thermal conductivity of KTP was considered in the calculations, and its impact is discussed. It is shown that the radiation term has a negligible effect and can be dropped safely, while the temperature dependence of thermal conductivity is more influential, such that ignorance of it brings some errors into the modeling. The time evolution of the temperature while the crystal is pumping with a train of successive Gaussian pulses until reaching equilibrium is shown. To accomplish numerical calculations, we developed a homemade code written with the finite difference time domain method in Intel Fortran (ifort) and ran it with the Linux operating system."
+license: "MIT"
+keywords:
+- "heat equation"
+- "thermal conductivity"
+- "KTP crystal"
+- "second harmonic generation"
+- "finite difference method"
+- "temperature distribution"
+- "pulsed wave"
+- "time-dependent"
+- "repetitively pulsed"
+- "Gaussian beams"
