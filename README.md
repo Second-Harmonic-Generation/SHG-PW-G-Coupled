@@ -64,11 +64,12 @@ Computational model of heat-coupled depleted pulsed Gaussian Second Harmonic Gen
 
 This repository contains the **toolkit and computational tools** used in the research article **"Heat coupled type II long-pulse second harmonic generation: a model for inclusion of thermal phase mismatching and thermal lensing"**, including source code, numerical solvers, and reproducibility assets.  
 
+
 This toolkit provides a comprehensive time-dependent three-dimensional spatial model for the mutual interaction of type II pulsed second harmonic generation and thermal effects in potassium titanyl phosphate (KTP) crystals. The toolkit implements a complete solution for five coupled differential equations solved simultaneously using the Finite Difference Method (FDM). The coupled equations include three field equations for fundamental ordinary wave, fundamental extraordinary wave, and second harmonic wave, one heat equation with temperature-dependent thermal conductivity, and one phase equation for thermal phase mismatching.
 
 The model considers several important physical effects: Gaussian distribution for transverse distribution of fundamental and second harmonic waves, depletion of pump waves during propagation, optical absorption of all waves, transverse Laplacian effects, evolution with successive pulses until steady-state temperature distribution is achieved, thermal cooling mechanisms including radiation and convection, and thermal lensing with associated optical aberrations. The simulation runs over time until a sufficient number of pulses enter the system to reach a steady-state thermal condition.
 
-The numerical procedure presented here offers substantial reduction in runtime for modeling repetitively pulsed pumping toward steady-state conditions. The optimized code requires approximately 2 GB RAM and 2 hours to complete simulations on personal computers, enabling accurate investigation of how thermally induced phase mismatching and thermal lensing reduce conversion efficiency and beam quality in second harmonic generation systems.  
+The numerical procedure presented here offers substantial reduction in runtime for modeling repetitively pulsed pumping toward steady-state conditions. The optimized code requires approximately 16 GB RAM and 1 minute to complete simulations on personal computers, enabling accurate investigation of how thermally induced phase mismatching and thermal lensing reduce conversion efficiency and beam quality in second harmonic generation systems.  
 
 
 ```
@@ -111,8 +112,8 @@ Folder PATH listing
 +---src                           <-- Contains source code
 │       Code_SHG_PW_G_Coupled…    <-- Fortran solver for coupled equations
 │
-│        LICENSE                   <-- Project license information
-│        README.md                 <-- Project overview and documentation
+        LICENSE                   <-- Project license information
+        README.md                 <-- Project overview and documentation
 
 ```
 
